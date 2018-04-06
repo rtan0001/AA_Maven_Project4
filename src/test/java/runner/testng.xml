@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite">
+    <!-- Default Suite -->
+    <test name="AA_Maven_Project2">
+        <classes>
+            <class name="runner.TestRunner"/>
+        </classes>
+    </test>
+    <!-- AA_Maven_Project2 -->
+</suite>

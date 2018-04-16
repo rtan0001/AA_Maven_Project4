@@ -82,8 +82,17 @@ public class CRM_Login_Form_Page extends BaseUtil {
         for (int i = 0; i <= rows_count; i++) {
             if (i == 3) {
 
-                no_rows.get(i).findElement(By.tagName("a")).click();
-                break;
+              List<WebElement> no_cols =   no_rows.get(i).findElements(By.tagName("th"));
+              int cols_count = no_cols.size();
+
+              for(int j=0; j<=cols_count; j++)
+              {
+                  if(j == 0) {
+                      no_cols.get(j).findElement(By.tagName("a")).click();
+                      break;
+                  }
+              }
+
 
             }
         }
@@ -468,8 +477,8 @@ public class CRM_Login_Form_Page extends BaseUtil {
 
     public void Close_FirstTab()
     {
-        driver.switchTo().parentFrame();
-//        driver.switchTo().frame("ext-comp-1035");
+         driver.switchTo().parentFrame();
+//         driver.switchTo().frame("ext-comp-1035");
         WebElement element1 = driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div[2]"));
         WebElement list_name =  element1.findElement(By.tagName("ul"));
         List<WebElement> list_items = list_name.findElements(By.tagName("li"));

@@ -43,13 +43,13 @@ public class CRM_Loginstepdefinition_Step extends BaseUtil {
     }
 
 
-    @Then("^I should see the Salesfroce home page$")
-    public void iShouldSeeTheSalesfroceHomePage() throws Throwable {
-
-        Thread.sleep(3000);
-        CRM_Login_Page.verify_Logout();
-
-    }
+//    @Then("^I should see the Salesfroce home page$")
+//    public void iShouldSeeTheSalesfroceHomePage() throws Throwable {
+//
+//        Thread.sleep(3000);
+//        CRM_Login_Page.verify_Logout();
+//
+//    }
 
 
     @Then("^Logout of the Application Salesforce Application$")
@@ -200,7 +200,7 @@ public class CRM_Loginstepdefinition_Step extends BaseUtil {
     @Given("^I Navigate to Close All the Tabs$")
     public void iNavigateToCloseAllTheTabs() throws Throwable {
 
-;
+
         CRM_Login_Page.Close_FirstTab();
         CRM_Login_Page.Close_SecondTab();
         CRM_Login_Page.Close_ThirdTab();
@@ -213,4 +213,14 @@ public class CRM_Loginstepdefinition_Step extends BaseUtil {
         CRM_Login_Page.Click_Logout();
         CRM_Login_Page.Tear_Down();
     }
+
+
+    @Then("^I should see the Salesforce home page$")
+    public void iShouldSeeTheSalesforceHomePage() throws Throwable {
+
+        Thread.sleep(3000);
+        CRM_Login_Page.verify_Logout();
+    }
+
+
 }

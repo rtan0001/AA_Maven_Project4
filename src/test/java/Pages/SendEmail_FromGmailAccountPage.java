@@ -59,8 +59,14 @@ public class SendEmail_FromGmailAccountPage extends BaseUtil{
         driver.findElement(By.xpath("//*[@class='Am Al editable LW-avf']")).click();
         driver.findElement(By.xpath("//*[@class='Am Al editable LW-avf']")).sendKeys("TestEmail From My Gmail Account");
         driver.findElement(By.xpath("//*[@class='a1 aaA aMZ']")).click();
+        //*[@class="a1 aaA aMZ"]
         Runtime.getRuntime().exec("C:\\Users\\rtan0001\\Downloads\\AutoIT\\test.exe");
-        Thread.sleep(10000);
+        Thread.sleep(15000);
+        driver.findElement(By.xpath("//*[@id=':d6']/div/input")).click();
+
+
+        Runtime.getRuntime().exec("C:\\Users\\rtan0001\\Downloads\\AutoIT\\test2.exe");
+        Thread.sleep(14000);
         driver.findElement(By.xpath("//*[@class='T-I J-J5-Ji aoO T-I-atl L3']")).click();
 
     }

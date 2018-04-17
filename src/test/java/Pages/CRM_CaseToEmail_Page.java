@@ -16,7 +16,7 @@ import static Pages.GenerateRegoEmailPage.getWindow;
 
 public class CRM_CaseToEmail_Page extends BaseUtil {
 
-
+    public String Enq_status = null;
 
 
     public CRM_CaseToEmail_Page(WebDriver driver) {
@@ -251,13 +251,37 @@ public class CRM_CaseToEmail_Page extends BaseUtil {
 
     public void EnterText_InTextArea_ToReply()
     {
-        driver.findElement(By.xpath("//*[@id=':jb']")).sendKeys("Reply To Test Email");
+
+
+        driver.findElement(By.xpath(" //*[@class='Am aO9 Al editable LW-avf']")).sendKeys("Reply To Test Email");
 
     }
 
     public void Click_SendButton()
     {
-        driver.findElement(By.xpath("//*[@id=':j4']")).click();
+        driver.findElement(By.xpath("//*[@class='T-I J-J5-Ji aoO T-I-atl L3']")).click();
+
+    }
+
+    public String Get_Enquiry_Status_FromEnquiryGrid()
+    {
+        driver.switchTo().parentFrame();
+        driver.switchTo().frame("ext-comp-1005");
+        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div[1]/form/div[3]"));
+        WebElement table_row = element.findElement(By.xpath("//*[@class='x-grid3-body']/div[1]/table/tbody/tr"));
+        List<WebElement> cell_data = table_row.findElements(By.tagName("td"));
+        int Cnt = cell_data.size();
+        for (int i = 0; i <= Cnt; i++) {
+            if (i == 10)
+            {
+                Enq_status = cell_data.get(i).getText();
+                break;
+
+            }
+
+        }
+
+        return Enq_status;
     }
 
 }

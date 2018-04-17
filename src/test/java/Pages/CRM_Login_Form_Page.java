@@ -16,6 +16,8 @@ public class CRM_Login_Form_Page extends BaseUtil {
 
     GenerateRegoEmailPage reg_email = new GenerateRegoEmailPage(driver);
 
+    public String Enq_status = null;
+
 
 
     public CRM_Login_Form_Page(WebDriver driver) {
@@ -295,6 +297,8 @@ public class CRM_Login_Form_Page extends BaseUtil {
 
     }
 
+
+
     public void Click_Details_FromEnquiry()
     {
         driver.switchTo().parentFrame();
@@ -557,7 +561,7 @@ public class CRM_Login_Form_Page extends BaseUtil {
 
 public void Click_Logout()
 {
-    driver.findElement(By.xpath("//*[@id='userNavLabel']")).click();
+     driver.findElement(By.xpath("//*[@id='userNavLabel']")).click();
 
      driver.findElement(By.xpath("//*[@id='app_logout']")).click();
 

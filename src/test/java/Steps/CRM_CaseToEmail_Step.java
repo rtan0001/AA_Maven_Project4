@@ -1,24 +1,33 @@
 package Steps;
 
+import Base.BaseUtil;
 import Pages.CRM_CaseToEmail_Page;
 import Pages.CRM_Login_Form_Page;
+import Pages.SendEmail_FromGmailAccountPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.junit.Assert;
 
-import static Base.BaseUtil.driver;
 import static Pages.GenerateRegoEmailPage.getWindow_First;
 
-public class CRM_CaseToEmail_Step {
+public class CRM_CaseToEmail_Step extends BaseUtil {
+
+
+
+    SendEmail_FromGmailAccountPage gmail_page = new SendEmail_FromGmailAccountPage(driver);
 
     CRM_CaseToEmail_Page App_Page = new CRM_CaseToEmail_Page(driver);
     CRM_Login_Form_Page  crm_page = new CRM_Login_Form_Page(driver);
     SendEmail_FromGmailAccountStep Gmail_steps = new SendEmail_FromGmailAccountStep();
 
     public String Enquiry_ref= null;
+
     public String newwindow = null;
+    public String newwindow1 = null;
     public String Enq_status = null;
+
 
     @And("^I go to Course Preference Grid click on ACPCode Link$")
     public void iGoToCoursePreferenceGridClickOnACPCodeLink() throws Throwable {
@@ -65,6 +74,7 @@ public class CRM_CaseToEmail_Step {
 
        Enq_status =  App_Page.Get_EnquiryStatus_AfterSendAnEmail();
        Assert.assertEquals(Enq_status, "Closed");
+        Thread.sleep(2000);
 
     }
 
@@ -83,12 +93,62 @@ public class CRM_CaseToEmail_Step {
         App_Page.select_FirstRow_FromInbox();
         Thread.sleep(3000);
         App_Page.Click_ReplyButton_FromEmail();
+        Thread.sleep(3000);
         App_Page.EnterText_InTextArea_ToReply();
         App_Page.Click_SendButton();
+        Thread.sleep(3000);
+    }
+
+
+    @Then("^The Enquiry status should be changed to Open$")
+    public void theEnquiryStatusShouldBeChangedToOpen() throws Throwable {
+
+
+        Assert.assertEquals(Enq_status, "Open");
+    }
+
+    @And("^I logout of gmail account$")
+    public void iLogoutOfGmailAccount() throws Throwable {
+
+        gmail_page.LogOut_Gmail();
+        gmail_page.Singout_Gmail();
+        gmail_page.Close_broeswr_window();
+
+    }
 
 
 
+    @When("^Assessor Select first enquiry From Enquiries list$")
+    public void assessorSelectFirstEnquiryFromEnquiriesList() throws Throwable {
 
+        Thread.sleep(2000);
+        crm_page.Goto_Enquiries_List();
+        crm_page.Click_RefreshIcon_Enquiry();
+        Thread.sleep(3000);
+
+    }
+
+    @Given("^Assessors logon into Salesforce CRM and Navigate to Enquiries$")
+    public void assessorsLogonIntoSalesforceCRMAndNavigateToEnquiries() throws Throwable {
+
+
+        initialization();
+        driver.get("https://test.salesforce.com/");
+        Thread.sleep(2000);
+        driver.manage().window().maximize();
+        Thread.sleep(2000);
+        crm_page.Set_username_password("rupa.tanneero@monash.edu.staging", "monash@2017");
+        crm_page.click_login_button();
+        Thread.sleep(3000);
+
+    }
+
+    @And("^Assessor check the status of the Enquiry should be in Open$")
+    public void assessorCheckTheStatusOfTheEnquiryShouldBeInOpen() throws Throwable {
+
+        Enq_status =  App_Page.Get_Enquiry_Status_FromEnquiryGrid();
+        Assert.assertEquals(Enq_status, "Open");
+        Thread.sleep(2000);
 
     }
 }
